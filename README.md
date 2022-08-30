@@ -1,9 +1,9 @@
 # POKEDEX
 
 Nome dos integrantes: 
-- Pessoa 1
-- Pessoa 2
-- Pessoa 3
+- Francine Hahn
+- Giovana Inez Vieira
+- Maria Fernandez de Moura Ferro
 
 Link do Surge: www.link.com.br
 
