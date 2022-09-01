@@ -1,6 +1,5 @@
 import styled from "styled-components";
 
-
 export const HeaderSection = styled.header `
     height: 10vh;
     background-color: lightgray;
@@ -9,6 +8,7 @@ export const HeaderSection = styled.header `
     align-items: center;
     gap: 2vw;
     padding-right: 8vw;
+    margin-bottom: 1.5vw;
     a {
         color: white;
         text-decoration: none;

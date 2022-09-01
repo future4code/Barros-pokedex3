@@ -1,15 +1,16 @@
 import {BrowserRouter, Routes, Route} from 'react-router-dom'
-import {HomePage} from './Pages/HomePage/HomePage'
-import {PokedexPage} from './Pages/PokedexPage/PokedexPage'
+import {HomePage} from '../components/Pages/HomePage/HomePage'
+import {PokedexPage} from '../components/Pages/PokedexPage/PokedexPage'
+import {DetailsPage} from '../components/Pages/DetailsPage/DetailsPage'
 
-
+ 
 export function Router() {
     return (
         <BrowserRouter>
             <Routes>
                 <Route path={"/"} element={<HomePage/>}/>
                 <Route path={"/pokedex"} element={<PokedexPage/>}/>
-                <Route path={"/detalhes/:"} element={<HomePage/>}/>
+                <Route path={"/detalhes/:name"} element={<DetailsPage/>}/>
             </Routes>
         </BrowserRouter>
     )
