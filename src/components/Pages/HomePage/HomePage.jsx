@@ -3,7 +3,8 @@ import { useContext } from "react";
 import { PokeContext } from "../../../context/context";
 import { Header } from "../../Header/Header"
 import PokeCard from "../../PokeCard/PokeCard";
-import { CardsContainer } from "./style";
+import { CardsContainer, Loading } from "./style";
+import loading from '../../../img/loading.png'
 
 export function HomePage() {
 
@@ -17,7 +18,7 @@ export function HomePage() {
         <>
             <Header/>
 
-            {isLoadingPokemons&&"...Carregando"}
+            {isLoadingPokemons && <Loading src={loading} alt={'Ícone de uma meia lua rodando'}/>}
 
             <CardsContainer>
                 {!isLoadingPokemons&&dataPokemons&&pokemons}
