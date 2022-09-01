@@ -10,7 +10,7 @@ export function HomePage() {
 
     const {dataPokemons, errorPokemons, isLoadingPokemons} = useContext(PokeContext)
     
-    const pokemons = dataPokemons&&dataPokemons.map((pokemon, index)=>{
+    const pokemons = dataPokemons&&dataPokemons.results.map((pokemon, index)=>{
         return <PokeCard key={index} pokemon={pokemon} index={index}/>
     })
 
