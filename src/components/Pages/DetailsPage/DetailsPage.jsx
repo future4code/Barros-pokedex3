@@ -38,7 +38,7 @@ export function DetailsPage() {
             <Header/>
 
             {isLoadingPokemons && <Loading src={loading} alt={'Ícone de uma meia lua rodando'}/>}
-            {!isLoadingPokemons && errorPokemons && <p>Ocorreu um erro.</p>}
+            {!isLoadingPokemons && errorPokemons && <p>Ocorreu um erro: {errorPokemons}</p>}
             {!isLoadingPokemons && dataPokemons && <PokemonTitle>{dataPokemons.name.toUpperCase()}</PokemonTitle>}
 
             <DetailsContainer>

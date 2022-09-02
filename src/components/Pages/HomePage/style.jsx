@@ -1,6 +1,6 @@
 import styled from "styled-components";
 
-export const CardsContainer = styled.main`
+export const CardsContainer = styled.section`
     display: flex;
     justify-content: center;
     gap: 1vw;
