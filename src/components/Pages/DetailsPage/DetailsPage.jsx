@@ -3,14 +3,17 @@ import { Header } from "../../Header/Header"
 import { useParams } from "react-router-dom";
 import { baseUrl } from "../../../constants/constants";
 import useRequestData from '../../../hooks/useRequestData'
-import { DetailsContainer, ImagesContainer, MovesContainer, PokemonTitle, StatsContainer, TypesAndMovesContainer, TypesContainer } from "./style";
+import { DetailsContainer, ImagesContainer, MovesContainer, PokemonTitle, StatsContainer, TypesAndMovesContainer, TypesContainer, Loading } from "./style";
+import loading from '../../../img/loading.png'
+
 
 export function DetailsPage() {
 
     const pathParams = useParams();
     const pokemon = pathParams.name
+    
     const [dataPokemons, errorPokemons, isLoadingPokemons] = useRequestData(`${baseUrl}/${pokemon}`)
-
+    
     const listStats = dataPokemons && dataPokemons.stats.map((stat, index) => {
         return (
             <li key={index}><span>{stat.stat.name.toUpperCase()}:</span> {stat.base_stat}</li>
@@ -34,7 +37,7 @@ export function DetailsPage() {
         <>
             <Header/>
 
-            {isLoadingPokemons && <p>Carregando...</p>}
+            {isLoadingPokemons && <Loading src={loading} alt={'Ícone de uma meia lua rodando'}/>}
             {!isLoadingPokemons && errorPokemons && <p>Ocorreu um erro.</p>}
             {!isLoadingPokemons && dataPokemons && <PokemonTitle>{dataPokemons.name.toUpperCase()}</PokemonTitle>}
 

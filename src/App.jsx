@@ -1,17 +1,18 @@
-import React from 'react'
+import React, {useState} from 'react'
 import {Router} from './routes/Router'
 import { PokeContext } from './context/context'
 import { GlobalStyle } from './GlobalStyle'
-import {baseUrl} from "../src/constants/constants"
-import useRequestData from "../src/hooks/useRequestData"
+
 
 function App() {
-
-  const [dataPokemons, errorPokemons, isLoadingPokemons] = useRequestData(`${baseUrl}`)
+  const [pokedexList, setPokedexList] = useState(() => {
+    const list = JSON.parse(localStorage.getItem("pokedex"))
+    return list || []
+})
 
   return (
     <div>
-      <PokeContext.Provider value={{dataPokemons, errorPokemons, isLoadingPokemons}}>
+      <PokeContext.Provider value={{pokedexList, setPokedexList}}>
         <GlobalStyle/>
         <Router/>
       </PokeContext.Provider>
