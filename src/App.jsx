@@ -1,7 +1,7 @@
 import React, {useState} from 'react'
 import {Router} from './routes/Router'
 import { PokeContext } from './context/context'
-import { GlobalStyle } from './GlobalStyle'
+import { GlobalStyle, Container } from './GlobalStyle'
 
 
 function App() {
@@ -11,12 +11,12 @@ function App() {
 })
 
   return (
-    <div>
+    <Container>
       <PokeContext.Provider value={{pokedexList, setPokedexList}}>
         <GlobalStyle/>
         <Router/>
       </PokeContext.Provider>
-    </div>
+    </Container>
   )
 }
 

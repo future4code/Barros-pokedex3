@@ -3,8 +3,8 @@ import styled from "styled-components";
 
 export const Container = styled.section `
     display: grid;
-    grid-template-columns: repeat(auto-fit, minmax(150px, 1fr));
-    column-gap: 3.5vw;
+    grid-template-columns: repeat(7, 120px);
+    column-gap: 6vw;
     row-gap: 3vh;
-    margin: 4vh 4vw;
+    margin: 4vh 2vw;
 `

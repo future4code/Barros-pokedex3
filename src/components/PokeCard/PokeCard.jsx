@@ -2,9 +2,12 @@ import React, {useContext, useEffect} from "react";
 import { PokeContext } from "../../context/context";
 import { Card, ButtonsCard } from "./style";
 import {useNavigate} from 'react-router-dom'
+import useRequestData from "../../hooks/useRequestData";
+import { baseUrl } from "../../constants/constants";
 
 
-const PokeCard=({pokemon, index, buttonCard})=>{
+const PokeCard=({pokemon, buttonCard})=>{
+    const [dataPokemon, isLoading] = useRequestData(`${baseUrl}/${pokemon.name}`)
     const {pokedexList, setPokedexList} = useContext(PokeContext)
     const navigate = useNavigate()
 
@@ -37,8 +40,8 @@ const PokeCard=({pokemon, index, buttonCard})=>{
     }
 
     return(
-        <Card>            
-            <img src={`https://raw.githubusercontent.com/PokeAPI/sprites/master/sprites/pokemon/${index + 1}.png`} alt={`Imagem do pokemon ${pokemon.name}`}/>
+        <Card>   
+            {!isLoading && dataPokemon && <img src={dataPokemon.sprites.front_default} alt={`Imagem do pokemon ${pokemon.name}`}/>}         
             <p>{pokemon.name.toUpperCase()}</p>
             <ButtonsCard>
                 <button onClick={()=>{navigate(`/detalhes/${pokemon.name}`)}}>Pokemon Details</button>
