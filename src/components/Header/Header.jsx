@@ -5,11 +5,13 @@ import logo from '../../img/logo.png'
 
 
 export function Header() {
+
+
     return (
         <HeaderSection>
             <div>
                 <img src={logo} alt={'Logo da Pokedex'}/>
-                <h1>Pokedéx</h1>
+                <h1>Pokédex</h1>
             </div>
             <nav>
                 <Link to={"/"}>Home</Link>
