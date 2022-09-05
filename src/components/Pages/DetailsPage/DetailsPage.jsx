@@ -1,17 +1,18 @@
-import React from "react"
+import React, { useContext } from "react"
 import { Header } from "../../Header/Header"
 import { useParams } from "react-router-dom";
 import { baseUrl } from "../../../constants/constants";
 import useRequestData from '../../../hooks/useRequestData'
 import { DetailsContainer, ImagesContainer, MovesContainer, PokemonTitle, StatsContainer, TypesAndMovesContainer, TypesContainer, Loading } from "./style";
 import loading from '../../../img/loading.png'
+import { PokeContext } from '../../../context/context'
 
 
 export function DetailsPage() {
 
     const pathParams = useParams();
     const pokemon = pathParams.name
-    
+    const {pokedexList, setPokedexList} = useContext(PokeContext)    
     const [dataPokemons, errorPokemons, isLoadingPokemons] = useRequestData(`${baseUrl}/${pokemon}`)
     
     const listStats = dataPokemons && dataPokemons.stats.map((stat, index) => {
@@ -32,10 +33,27 @@ export function DetailsPage() {
         )
     })
 
+    //Adicionar ou remover pokémon da pokédex
+    const addOrRemove=()=>{
+        for(let i= 0; i < pokedexList.length; i++){
+            if(pokedexList[i].name !== dataPokemons.name){
+                const pokedex = [...pokedexList, dataPokemons]
+                return setPokedexList(pokedex)
+            } else {
+                const remove = pokedexList.filter((item)=>{
+                    return item.name !== dataPokemons.name
+                })
+                setPokedexList(remove)
+            }
+        }
+    }
+
 
     return (
         <>
             <Header/>
+
+            <button onClick={addOrRemove}>Adicionar/Remover da Pokédex</button>
 
             {isLoadingPokemons && <Loading src={loading} alt={'Ícone de uma meia lua rodando'}/>}
             {!isLoadingPokemons && errorPokemons && <p>Ocorreu um erro: {errorPokemons}</p>}
