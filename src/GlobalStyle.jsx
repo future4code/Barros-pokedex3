@@ -19,4 +19,7 @@ export const GlobalStyle = createGlobalStyle `
 
 export const Container = styled.main `
     font-family: 'Montserrat', sans-serif;
+    button {
+        cursor: pointer;
+    }
 `

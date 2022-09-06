@@ -37,8 +37,7 @@ export const ButtonsCard = styled.div`
         border: solid 0.1vw var(--light-yellow);
         box-shadow: rgba(17, 17, 26, 0.1) 0px 4px 16px, rgba(17, 17, 26, 0.05) 0px 8px 32px;        
         :hover{
-            transform: scale(1.2);
-            transition: all 0.5s;
+            opacity: .8;
         }
     }
 `
