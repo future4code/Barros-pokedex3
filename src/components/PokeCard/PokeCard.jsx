@@ -4,6 +4,7 @@ import { Card, ButtonsCard } from "./style";
 import {useNavigate} from 'react-router-dom'
 import useRequestData from "../../hooks/useRequestData";
 import { baseUrl } from "../../constants/constants";
+import Swal from "sweetalert2";
 
 
 const PokeCard=({pokemon, buttonCard})=>{
@@ -24,13 +25,23 @@ const PokeCard=({pokemon, buttonCard})=>{
     //Remover pokemon da lista da pokedex
     const removePokemon = (poke) => {
         setReload(!reload)
-        const confirmation = confirm(`Você tem cerceza que deseja remover o ${poke.name.toUpperCase()} da sua pokedéx?`)
-        if(confirmation) {
-            const list = pokedexList.filter(item => {
-                return item.name !== poke.name
-            })
-            setPokedexList(list)
-        }
+        Swal.fire({
+            text:`Tem certeza que deseja remover ${poke.name.toUpperCase()} da sua Pokedéx?`,
+            confirmButtonColor: '#0075BE',
+            showDenyButton: true,
+            denyButtonText: "Cancelar"
+        })
+        .then((result) => {
+            if(result.isConfirmed) {
+                const list = pokedexList.filter(item => {
+                    return item.name !== poke.name
+                })
+                setPokedexList(list)
+                Swal.fire('Pokémon removido da Pokédex!', '', 'success')
+            } else if(result.isDenied) {
+                Swal.fire("Pokémon mantido na Pokédex!")
+            }
+        })
     }
 
     return(
