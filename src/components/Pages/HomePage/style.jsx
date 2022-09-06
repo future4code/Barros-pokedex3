@@ -31,4 +31,11 @@ export const ButtonsPage = styled.div`
     gap: 10px;
     justify-content: center;
     align-items: center;
+
+    form > input {
+    width: 40px;
+    padding: 2px 0;
+    text-align: right;
+    border: 1px solid var(--dark-yellow);
+    }
 `
