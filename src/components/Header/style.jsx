@@ -32,4 +32,5 @@ export const HeaderSection = styled.header `
             }
         }
     }
+
 `
