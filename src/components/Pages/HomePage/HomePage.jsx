@@ -54,7 +54,7 @@ export function HomePage() {
     if (offset === 0) {
         Buttons = <ButtonsPage>
             <form onSubmit={ChoosePage}>
-                <input type="number" value={page} onChange={(e) => setPage(e.target.value)}/>
+                <input type="number" value={page} onChange={(e) => setPage(e.target.value)} max={55}/>
             </form>
                 <button onClick={NextPage}>Próximo</button>
                 </ButtonsPage>
@@ -62,7 +62,7 @@ export function HomePage() {
         Buttons = <ButtonsPage>
             <button onClick={PreviousPage}>Anterior</button>
             <form onSubmit={ChoosePage}>
-                <input type="number" value={page} onChange={(e) => setPage(e.target.value)}/>
+                <input type="number" value={page} onChange={(e) => setPage(e.target.value)} max={55}/>
             </form>
             <button onClick={NextPage}>Próximo</button>
         </ButtonsPage>
@@ -70,7 +70,7 @@ export function HomePage() {
         Buttons = <ButtonsPage>
             <button onClick={PreviousPage}>Anterior</button>
             <form onSubmit={ChoosePage}>
-                <input type="number" value={page} onChange={(e) => setPage(e.target.value)}/>
+                <input type="number" value={page} onChange={(e) => setPage(e.target.value)} max={55}/>
             </form>
         </ButtonsPage>
     }
