@@ -1,7 +1,7 @@
 import React, { useContext, useState } from "react";
 import { Header } from "../../Header/Header"
 import PokeCard from "../../PokeCard/PokeCard";
-import { CardsContainer, Loading } from "./style";
+import { ButtonsPage, CardsContainer, Loading } from "./style";
 import loading from '../../../img/loading.png'
 import { GlobalContext } from "../../../context/GlobalContext";
 import useRequestData from "../../../hooks/useRequestData";
@@ -12,6 +12,9 @@ export function HomePage() {
     const [dataPokemons, errorPokemons, isLoadingPokemons] = useRequestData(baseUrl)
     const {pokedexList} = useContext(GlobalContext)
     const [buttonCard] = useState("add")
+    
+    const [offset, setOffset] = useState(0)
+    const [dataPokemons, errorPokemons, isLoadingPokemons] = useRequestData(`${baseUrl}?limit=21&offset=${offset}`)
 
     const pokemons = () => {
         if (pokedexList.length > 0) {
@@ -30,6 +33,7 @@ export function HomePage() {
         }
     }
 
+
     return (
         <>
             <Header/>
@@ -41,6 +45,11 @@ export function HomePage() {
             </CardsContainer>           
 
             {!isLoadingPokemons && errorPokemons && <p>Erro: {errorPokemons}</p>}
+
+            <ButtonsPage>
+                <button onClick={() => setOffset(offset - 21)}>Previous</button>
+                <button onClick={() => setOffset(offset + 21)}>Next</button>
+            </ButtonsPage>
         </>
     )
 }
