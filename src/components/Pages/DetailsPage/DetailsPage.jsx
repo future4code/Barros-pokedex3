@@ -1,9 +1,9 @@
-import React, { useContext } from "react"
+import React, { useContext} from "react"
 import { Header } from "../../Header/Header"
 import { useParams } from "react-router-dom";
 import { baseUrl } from "../../../constants/constants";
 import useRequestData from '../../../hooks/useRequestData'
-import { DetailsContainer, ImagesContainer, MovesContainer, PokemonTitle, StatsContainer, TypesAndMovesContainer, TypesContainer, Loading } from "./style";
+import { Container, TypesContainer, Loading } from "./style";
 import loading from '../../../img/loading.png'
 import { GlobalContext } from '../../../context/GlobalContext'
 
@@ -15,9 +15,16 @@ export function DetailsPage() {
     const {pokedexList, setPokedexList} = useContext(GlobalContext)    
     const [dataPokemons, errorPokemons, isLoadingPokemons] = useRequestData(`${baseUrl}/${pokemon}`)
     
+    //Lista só com os nomes dos pokemons que estão na pokedéx
+    let listOfNames = []
+    for(let i = 0; i < pokedexList.length; i++) {
+        listOfNames.push(pokedexList[i].name)
+    }
+
+    //Pegando os detalhes de cada pokemón
     const listStats = dataPokemons && dataPokemons.stats.map((stat, index) => {
         return (
-            <li key={index}><span>{stat.stat.name.toUpperCase()}:</span> {stat.base_stat}</li>
+            <li key={index}><strong><span>{stat.stat.name.toUpperCase()}:</span></strong> {stat.base_stat}</li>
         )
     })
 
@@ -27,57 +34,58 @@ export function DetailsPage() {
         )
     })
 
+
     const listMoves = dataPokemons && dataPokemons.moves.map((move, index) => {
         return (
             <li key={index}> <span> {move.move.name.toUpperCase()} </span></li>
         )
     })
 
-    //Adicionar ou remover pokémon da pokédex
-    const addOrRemove=()=>{
-        for(let i= 0; i < pokedexList.length; i++){
-            if(pokedexList[i].name !== dataPokemons.name){
-                const pokedex = [...pokedexList, dataPokemons]
-                return setPokedexList(pokedex)
-            } else {
-                const remove = pokedexList.filter((item)=>{
-                    return item.name !== dataPokemons.name
-                })
-                setPokedexList(remove)
-            }
+    //Adicionar ou remover pokémon da pokedéx
+    const addOrRemove = () => {
+        if(listOfNames.includes(pokemon)) {
+            const remove = pokedexList.filter((item) => {
+                return item.name !== pokemon
+            })
+            alert(`Você removeu o ${pokemon.toUpperCase()} da sua pokedéx!`)
+            return setPokedexList(remove)
+        } else {
+            const pokedex = [...pokedexList, dataPokemons]
+            alert(`Você adicionou o ${pokemon.toUpperCase()} à sua pokedéx!`)
+            return setPokedexList(pokedex)
         }
     }
 
 
+
     return (
         <>
-            <Header/>
-
-            <button onClick={addOrRemove}>Adicionar/Remover da Pokédex</button>
-
+            <Header/>            
             {isLoadingPokemons && <Loading src={loading} alt={'Ícone de uma meia lua rodando'}/>}
             {!isLoadingPokemons && errorPokemons && <p>Ocorreu um erro: {errorPokemons}</p>}
-            {!isLoadingPokemons && dataPokemons && <PokemonTitle>{dataPokemons.name.toUpperCase()}</PokemonTitle>}
-
-            <DetailsContainer>
-                <ImagesContainer>
-                    {!isLoadingPokemons && dataPokemons && <img src={dataPokemons.sprites.front_default} alt="De frente"/>}
-                    {!isLoadingPokemons && dataPokemons && <img src={dataPokemons.sprites.back_default} alt="De costas"/>}
-                </ImagesContainer>
-                <StatsContainer>
-                    <p>Stats</p>
-                    {!isLoadingPokemons && dataPokemons && <ul>{listStats}</ul>}
-                </StatsContainer>
-                <TypesAndMovesContainer>
+            {!isLoadingPokemons && dataPokemons && (
+                <>
                     <TypesContainer>
-                        {!isLoadingPokemons && dataPokemons && <ul>{listTypes}</ul>}
+                        <button onClick={addOrRemove}>{listOfNames.includes(pokemon)? "Remover da pokedéx" : "Adicionar à pokedéx"}</button>
+                        <h1>{dataPokemons.name.toUpperCase()}</h1>
+                        <ul>{listTypes}</ul>
                     </TypesContainer>
-                    <MovesContainer>
-                        <p>Principais Ataques</p>
-                        {!isLoadingPokemons && dataPokemons && <ul>{listMoves}</ul>}
-                    </MovesContainer>
-                </TypesAndMovesContainer>
-            </DetailsContainer>
+                    <Container>
+                        <picture>
+                            <img src={dataPokemons.sprites.front_default} alt="De frente"/>
+                            <img src={dataPokemons.sprites.back_default} alt="De costas"/>
+                        </picture>
+                        <div>
+                            <h2>Stats</h2>
+                            {!isLoadingPokemons && dataPokemons && <ul>{listStats}</ul>}
+                        </div>    
+                        <div>
+                            <h2>Principais Ataques</h2>
+                            {!isLoadingPokemons && dataPokemons && <ul>{listMoves}</ul>}
+                        </div>
+                    </Container>
+                </>
+            )}
         </>
     )
 }

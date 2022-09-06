@@ -9,13 +9,12 @@ import { baseUrl } from "../../../constants/constants";
 
 
 export function HomePage() {
-    const [dataPokemons, errorPokemons, isLoadingPokemons] = useRequestData(baseUrl)
+    const [offset, setOffset] = useState(0)
+    const [dataPokemons, errorPokemons, isLoadingPokemons] = useRequestData(`${baseUrl}?limit=21&offset=${offset}`)
     const {pokedexList} = useContext(GlobalContext)
     const [buttonCard] = useState("add")
     
-    const [offset, setOffset] = useState(0)
-    const [dataPokemons, errorPokemons, isLoadingPokemons] = useRequestData(`${baseUrl}?limit=21&offset=${offset}`)
-
+    //Renderizar os pokemóns que não estão na pokedéx
     const pokemons = () => {
         if (pokedexList.length > 0) {
             let filter = dataPokemons.results.filter(pokemon => pokemon.name !== pokedexList[0].name)
@@ -33,7 +32,6 @@ export function HomePage() {
         }
     }
 
-
     return (
         <>
             <Header/>
@@ -44,12 +42,14 @@ export function HomePage() {
                 {!isLoadingPokemons && dataPokemons && pokemons()}
             </CardsContainer>           
 
-            {!isLoadingPokemons && errorPokemons && <p>Erro: {errorPokemons}</p>}
+            {!isLoadingPokemons && dataPokemons && (
+                <ButtonsPage>
+                    <button onClick={() => setOffset(offset - 21)}>Anterior</button>
+                    <button onClick={() => setOffset(offset + 21)}>Próximo</button>
+                </ButtonsPage>
+            )}
 
-            <ButtonsPage>
-                <button onClick={() => setOffset(offset - 21)}>Previous</button>
-                <button onClick={() => setOffset(offset + 21)}>Next</button>
-            </ButtonsPage>
+            {!isLoadingPokemons && errorPokemons && <p>Erro: {errorPokemons}</p>}
         </>
     )
 }
