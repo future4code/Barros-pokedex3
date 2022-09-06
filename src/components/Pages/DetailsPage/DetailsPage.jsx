@@ -6,6 +6,7 @@ import useRequestData from '../../../hooks/useRequestData'
 import { Container, TypesContainer, Loading } from "./style";
 import loading from '../../../img/loading.png'
 import { GlobalContext } from '../../../context/GlobalContext'
+import Swal from "sweetalert2";
 
 
 export function DetailsPage() {
@@ -47,11 +48,21 @@ export function DetailsPage() {
             const remove = pokedexList.filter((item) => {
                 return item.name !== pokemon
             })
-            alert(`Você removeu o ${pokemon.toUpperCase()} da sua pokedéx!`)
+            Swal.fire({
+                title: 'Sucesso!',
+                text:`Você removeu o ${pokemon.toUpperCase()} da sua pokedéx!`,
+                icon: "success",
+                confirmButtonColor: '#0075BE'
+            })
             return setPokedexList(remove)
         } else {
             const pokedex = [...pokedexList, dataPokemons]
-            alert(`Você adicionou o ${pokemon.toUpperCase()} à sua pokedéx!`)
+            Swal.fire({
+                title: 'Sucesso!',
+                text:`Você adicionou o ${pokemon.toUpperCase()} à sua pokedéx!`,
+                icon: "success",
+                confirmButtonColor: '#0075BE'
+            })
             return setPokedexList(pokedex)
         }
     }
