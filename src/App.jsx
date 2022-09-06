@@ -1,21 +1,17 @@
-import React, {useState} from 'react'
+import React from 'react'
 import {Router} from './routes/Router'
-import { PokeContext } from './context/context'
 import { GlobalStyle, Container } from './GlobalStyle'
+import { GlobalState } from './context/GlobalState'
 
 
 function App() {
-  const [pokedexList, setPokedexList] = useState(() => {
-    const list = JSON.parse(localStorage.getItem("pokedex"))
-    return list || []
-})
 
   return (
     <Container>
-      <PokeContext.Provider value={{pokedexList, setPokedexList}}>
+      <GlobalState>
         <GlobalStyle/>
         <Router/>
-      </PokeContext.Provider>
+      </GlobalState>
     </Container>
   )
 }

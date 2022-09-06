@@ -5,14 +5,14 @@ import { baseUrl } from "../../../constants/constants";
 import useRequestData from '../../../hooks/useRequestData'
 import { DetailsContainer, ImagesContainer, MovesContainer, PokemonTitle, StatsContainer, TypesAndMovesContainer, TypesContainer, Loading } from "./style";
 import loading from '../../../img/loading.png'
-import { PokeContext } from '../../../context/context'
+import { GlobalContext } from '../../../context/GlobalContext'
 
 
 export function DetailsPage() {
 
     const pathParams = useParams();
     const pokemon = pathParams.name
-    const {pokedexList, setPokedexList} = useContext(PokeContext)    
+    const {pokedexList, setPokedexList} = useContext(GlobalContext)    
     const [dataPokemons, errorPokemons, isLoadingPokemons] = useRequestData(`${baseUrl}/${pokemon}`)
     
     const listStats = dataPokemons && dataPokemons.stats.map((stat, index) => {
