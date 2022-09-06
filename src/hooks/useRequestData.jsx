@@ -18,7 +18,7 @@ const useRequestData=(url)=>{
             setIsLoading(false)
             setError(er.response.data.message)
         })
-    }, [])
+    }, [url])
 
     return [data, error, isLoading]
 }
