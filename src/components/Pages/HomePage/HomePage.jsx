@@ -13,6 +13,7 @@ export function HomePage() {
     const [dataPokemons, errorPokemons, isLoadingPokemons] = useRequestData(`${baseUrl}?limit=21&offset=${offset}`)
     const {pokedexList} = useContext(GlobalContext)
     const [buttonCard] = useState("add")
+    const [page, setPage] = useState(1)
     
     //Renderizar os pokemóns que não estão na pokedéx
     const pokemons = () => {
@@ -21,7 +22,6 @@ export function HomePage() {
             for (let i = 1; i < pokedexList.length; i++) {
                 filter = filter.filter(pokemon => pokemon.name !== pokedexList[i].name)
             }
-            console.log(filter)
             return filter.map((pokemon, index)=>{
                 return <PokeCard key={index} pokemon={pokemon} buttonCard={buttonCard}/>
             })
@@ -30,6 +30,49 @@ export function HomePage() {
                 return <PokeCard key={index} pokemon={pokemon} buttonCard={buttonCard}/>
             })
         }
+    }
+
+    const totalOffset = dataPokemons && (Number(dataPokemons.count) - 21)
+
+    const NextPage = () => {
+        setOffset(offset + 21)
+        setPage(Number(page) + 1)
+    }
+
+    const PreviousPage = () => {
+        setOffset(offset - 21)
+        setPage(Number(page) - 1)
+    }
+
+    const ChoosePage = (e) => {
+        e.preventDefault()
+        setPage(page)
+        setOffset((page - 1) * 21)
+    }
+
+    let Buttons
+    if (offset === 0) {
+        Buttons = <ButtonsPage>
+            <form onSubmit={ChoosePage}>
+                <input type="number" value={page} onChange={(e) => setPage(e.target.value)} max={55}/>
+            </form>
+                <button onClick={NextPage}>Próximo</button>
+                </ButtonsPage>
+    } else if (offset > 0 && offset < totalOffset) {
+        Buttons = <ButtonsPage>
+            <button onClick={PreviousPage}>Anterior</button>
+            <form onSubmit={ChoosePage}>
+                <input type="number" value={page} onChange={(e) => setPage(e.target.value)} max={55}/>
+            </form>
+            <button onClick={NextPage}>Próximo</button>
+        </ButtonsPage>
+    } else {
+        Buttons = <ButtonsPage>
+            <button onClick={PreviousPage}>Anterior</button>
+            <form onSubmit={ChoosePage}>
+                <input type="number" value={page} onChange={(e) => setPage(e.target.value)} max={55}/>
+            </form>
+        </ButtonsPage>
     }
 
     return (
@@ -42,12 +85,7 @@ export function HomePage() {
                 {!isLoadingPokemons && dataPokemons && pokemons()}
             </CardsContainer>           
 
-            {!isLoadingPokemons && dataPokemons && (
-                <ButtonsPage>
-                    <button onClick={() => setOffset(offset - 21)}>Anterior</button>
-                    <button onClick={() => setOffset(offset + 21)}>Próximo</button>
-                </ButtonsPage>
-            )}
+            {!isLoadingPokemons && dataPokemons && <>{Buttons}</>}
 
             {!isLoadingPokemons && errorPokemons && <p>Erro: {errorPokemons}</p>}
         </>
