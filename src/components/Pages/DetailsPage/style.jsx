@@ -18,17 +18,19 @@ export const Container = styled.section `
             }
         }
         :nth-child(3) {
-            height: 60vh;
-            overflow-y: scroll;
-            ::-webkit-scrollbar-track {
-                background-color: #ebe9e9;
-            }
-            ::-webkit-scrollbar {
-                width: .4vw;
-                background: #ebe9e9;
-            }
-            ::-webkit-scrollbar-thumb {
-                background: var(--dark-yellow);
+            ul {
+                height: 60vh;
+                overflow-y: scroll;
+                ::-webkit-scrollbar-track {
+                    background-color: #ebe9e9;
+                }
+                ::-webkit-scrollbar {
+                    width: .4vw;
+                    background: #ebe9e9;
+                }
+                ::-webkit-scrollbar-thumb {
+                    background: var(--dark-yellow);
+                }
             }
         }
     }

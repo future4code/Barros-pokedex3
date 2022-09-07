@@ -49,9 +49,9 @@ const PokeCard=({pokemon, buttonCard})=>{
             {!isLoading && dataPokemon && <img src={dataPokemon.sprites.front_default} alt={`Imagem do pokemon ${pokemon.name}`}/>}
             <p>{pokemon.name.toUpperCase()}</p>
             <ButtonsCard>
-                <button onClick={()=>{navigate(`/detalhes/${pokemon.name}`)}}>Detalhes do Pokémon</button>
-                {buttonCard==="add" && <button onClick={()=>{addPokemon(pokemon)}}>Adicionar à Pokédex</button>}
-                {buttonCard==="remove" && <button onClick={()=>{removePokemon(pokemon)}}>Remover da Pokédex</button>}
+                <button onClick={()=>{navigate(`/detalhes/${pokemon.name}`)}}>Ver mais</button>
+                {buttonCard==="add" && <button onClick={()=>{addPokemon(pokemon)}}>Adicionar</button>}
+                {buttonCard==="remove" && <button onClick={()=>{removePokemon(pokemon)}}>Remover</button>}
             </ButtonsCard>
         </Card>
     )

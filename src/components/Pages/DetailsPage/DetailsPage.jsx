@@ -1,4 +1,4 @@
-import React, { useContext} from "react"
+import React, { useContext, useState} from "react"
 import { Header } from "../../Header/Header"
 import { useParams } from "react-router-dom";
 import { baseUrl } from "../../../constants/constants";
@@ -13,7 +13,7 @@ export function DetailsPage() {
 
     const pathParams = useParams();
     const pokemon = pathParams.name
-    const {pokedexList, setPokedexList} = useContext(GlobalContext)    
+    const {pokedexList, setPokedexList} = useContext(GlobalContext)
     const [dataPokemons, errorPokemons, isLoadingPokemons] = useRequestData(`${baseUrl}/${pokemon}`)
     
     //Lista só com os nomes dos pokemons que estão na pokedéx
@@ -23,12 +23,14 @@ export function DetailsPage() {
     }
 
     //Pegando os detalhes de cada pokemón
+    let sum = []
     const listStats = dataPokemons && dataPokemons.stats.map((stat, index) => {
+        sum.push(stat.base_stat)
         return (
             <li key={index}><strong><span>{stat.stat.name.toUpperCase()}:</span></strong> {stat.base_stat}</li>
         )
     })
-
+    
     const listTypes = dataPokemons && dataPokemons.types.map((type, index) => {
         return (
             <li key={index}> <span> {type.type.name.toUpperCase()} </span></li>
@@ -41,6 +43,9 @@ export function DetailsPage() {
             <li key={index}> <span> {move.move.name.toUpperCase()} </span></li>
         )
     })
+
+    //Soma das stats
+    const sumStats = sum.reduce((prev, num) => parseInt(prev) + parseInt(num), 0)
 
     //Adicionar ou remover pokémon da pokedéx
     const addOrRemove = () => {
@@ -67,8 +72,6 @@ export function DetailsPage() {
         }
     }
 
-
-
     return (
         <>
             <Header/>            
@@ -88,7 +91,13 @@ export function DetailsPage() {
                         </picture>
                         <div>
                             <h2>Stats</h2>
-                            {!isLoadingPokemons && dataPokemons && <ul>{listStats}</ul>}
+                            {!isLoadingPokemons && dataPokemons && (
+                                <>
+                                    <ul>{listStats}</ul>
+                                    <hr/>
+                                    <p><strong>SOMA:</strong> {sumStats}</p>
+                                </>
+                            )}
                         </div>    
                         <div>
                             <h2>Principais Ataques</h2>
