@@ -3,8 +3,13 @@ import styled from "styled-components";
 export const CardsContainer = styled.section`
     display: flex;
     justify-content: center;
-    gap: 1vw;
     flex-wrap: wrap;
+    @media screen and (min-width: 525px) {
+        gap: 1vw;
+    }
+    @media screen and (max-width: 525px) {
+        gap: 5vw;
+    }
 `
 
 export const Loading = styled.img `
@@ -27,7 +32,8 @@ export const Loading = styled.img `
 
 export const ButtonsPage = styled.div`
     display: flex;
-    margin-top: 1vw;
+    margin-top: 3vh;
+    padding-bottom: 3vh;
     gap: 10px;
     justify-content: center;
     align-items: center;
@@ -37,5 +43,24 @@ export const ButtonsPage = styled.div`
     padding: 2px 0;
     text-align: right;
     border: 1px solid var(--dark-yellow);
+    }
+
+    img {
+        cursor: pointer;
+        @media screen and (min-width: 1000px) {
+            width: 2%;
+        }
+        @media screen and (min-width: 700px) and (max-width: 1000px) {
+            width: 3%;
+        }
+        @media screen and (min-width: 500px) and (max-width: 700px) {
+            width: 4%;
+        }
+        @media screen and (max-width: 500px) {
+            width: 6%;
+        }
+        :hover {
+            opacity: .8;
+        }
     }
 `

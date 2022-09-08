@@ -4,8 +4,13 @@ import styled from "styled-components";
 export const Container = styled.section `
     display: flex;
     justify-content: center;
-    gap: 1vw;
     flex-wrap: wrap;
+    @media screen and (min-width: 525px) {
+        gap: 1vw;
+    }
+    @media screen and (max-width: 525px) {
+        gap: 5vw;
+    }
 `
 
 export const Battle = styled.form `
@@ -14,6 +19,9 @@ export const Battle = styled.form `
     justify-content: center;
     gap: 1.5vw;
     margin: 2vh 0;
+    padding: 3vh 0;
+    background-color: whitesmoke;
+    width: 100%;
     select {
         max-width: 15vw;
         min-width: 8vw;
@@ -42,6 +50,13 @@ export const Battle = styled.form `
     span{
         font-size: 1.5vw;
     }
+    img {
+        width: 3%;
+        cursor: pointer;
+        :hover {
+            opacity: .8;
+        }
+    }
 `
 
 export const BattleButton = styled.button `
@@ -62,9 +77,17 @@ export const Winner = styled.section `
         margin-top: 17vh;
     }
     img {
-        width: 10%;
         display: block;
         margin: 2vh auto 0 auto;
+        @media screen and (min-width: 1100px) {
+            width: 6%;
+        }
+        @media screen and (min-width: 600px) and (max-width: 1100px) {
+            width: 10%;
+        }
+        @media screen and (max-width: 600px) {
+            width: 20%;
+        }
         @keyframes animationPokemon {
             0% {transform: translateY(1.5vw)}
             50% {transform: translateY(-1.5vh)}
@@ -83,4 +106,7 @@ export const ContainerPokedex= styled.section`
     display: flex;
     flex-direction: column;
     align-items: center;
+    h2 {
+        margin-top: 8vh;
+    }
 `

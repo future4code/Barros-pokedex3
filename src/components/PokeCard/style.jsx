@@ -6,33 +6,27 @@ export const Card = styled.section`
     justify-content: center;
     align-items: center;
     background-color: whitesmoke;
-    width: 13vw;
-    height: 25vh;
     text-align: center;
-
     p{
         font-weight: bold;
-        font-size: 0.8vw;
     }
-
     img{
         margin-bottom: 1vw;
         width: 5vw;
     }
 
     @media screen and (max-width: 525px){
-        width: 40vw;
+        width: 42vw;
         height: 30vh;
-
         img{
             min-width: 23vw;
             max-width: 28vw;
         }
     }
 
-    @media screen and (min-width: 526px) and (max-width: 800px){
+    @media screen and (min-width: 650px) and (max-width: 800px){
         width: 30vw;
-        height: 26vh;
+        height: 32vh;
 
         img{
             min-width: 16vw;
@@ -40,10 +34,30 @@ export const Card = styled.section`
         }
     }
 
-    @media screen and (min-width: 801px){
+    @media screen and (min-width: 526px) and (max-width: 650px){
+        width: 30vw;
+        height: 28vh;
+
+        img{
+            min-width: 16vw;
+            max-width: 20vw;
+        }
+    }
+
+    @media screen and (min-width: 801px) and (max-width: 1200px){
         min-width: 15vw;
         max-width: 30vw;
-        min-height: 29vh;
+        min-height: 20vh;
+        max-height: 32vh;
+
+        img{
+            min-width: 5vw;
+        }  
+    }
+    @media screen and (min-width: 1200px) {
+        min-width: 15vw;
+        max-width: 30vw;
+        min-height: 30vh;
         max-height: 40vh;
 
         img{

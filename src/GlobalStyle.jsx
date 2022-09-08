@@ -80,8 +80,8 @@ export const Container = styled.main `
         color: white;
         border-style: none;
         background-color: var(--dark-yellow);
-        padding: 1vh;
-        border-radius: 20%;
+        padding: .8vh .5vw;
+        border-radius: 5px;
         border: solid 0.1vw var(--light-yellow);
         box-shadow: rgba(17, 17, 26, 0.1) 0px 4px 16px, rgba(17, 17, 26, 0.05) 0px 8px 32px;
         :hover {
@@ -90,36 +90,19 @@ export const Container = styled.main `
 
         @media screen and (max-width: 525px){
             font-size: 3vw;
-            min-width: 15vw;
-            max-width: 20vw;
-            min-height: 2vh;
-            max-height: 5vh;
             margin-top: 1vw;
-            padding: 0.7vw;
         }
 
         @media screen and (min-width: 526px) and (max-width: 800px){
             font-size: 2vw;
-            min-width: 12vw;
-            max-width: 25vw;
-            min-height: 1vh;
-            max-height: 3vh;
             margin-bottom: 1.5vw;
             margin-top: 1vw;
-            padding: 0.4vw;
         }
 
         @media screen and (min-width: 801px){
             font-size: 0.8vw;
-            min-width: 3vw;
-            max-width: 10vw;
-            min-height: 2vh;
-            max-height: 5vh;
             margin-bottom: 1.5vw;
             margin-top: 1vw;
-            padding: 0.3vw;
         }
-
-
     }
 `
