@@ -109,4 +109,22 @@ export const ContainerPokedex= styled.section`
     h2 {
         margin-top: 8vh;
     }
+    button{
+        :nth-child(3){
+            margin-top: 1.5vw;
+            margin-bottom: 2vw;
+
+            @media screen and (max-width: 525px){
+                margin-top: 4vw;
+                margin-bottom: 6vw;
+            }
+
+            @media screen and (min-width: 526px) and (max-width: 800px){
+                margin-top: 3vw;
+                margin-bottom: 5vw;
+            }   
+
+        }
+    }
 `
+
