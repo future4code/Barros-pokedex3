@@ -57,6 +57,28 @@ export const TypeList = styled.li `
         opacity: 85%;
         border: 1px solid ${(props) => props.color};
         padding: .5vh;
+
+        @media screen and (max-width: 525px){
+            min-width: 17vw;
+        }
+
+        @media screen and (min-width: 526px) and (max-width: 800px){
+            min-width: 15vw;
+        }
+
+        @media screen and (min-width: 801px){
+            min-width: 6vw;
+        }
+
+        span {
+            @media screen and (max-width: 525px){
+                font-size: 3vw;
+            }
+            @media screen and (min-width: 801px){
+                font-size: 1vw;
+            }
+        }
+        
 `
 
 export const Loading = styled.img `

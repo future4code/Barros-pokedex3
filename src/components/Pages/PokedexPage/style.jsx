@@ -12,10 +12,35 @@ export const Battle = styled.form `
     display: flex;
     align-items: center;
     justify-content: center;
-    gap: 2vw;
+    gap: 1.5vw;
     margin: 2vh 0;
     select {
-        padding: 1vh 1vw;
+        max-width: 15vw;
+        min-width: 8vw;
+        min-height: 4vh;
+        max-height: 5vh;
+        font-size: 0.8vw;
+        font-weight: bold;
+        font-family: 'Montserrat', sans-serif;
+        border-style: dashed;
+        border: solid 3px var(--light-blue);
+        @media screen and (max-width: 525px){
+            font-size: 2vw;
+            min-width: 12vw;
+            max-width: 20vw;
+        }
+
+        @media screen and (min-width: 526px) and (max-width: 800px){
+            font-size: 1.8vw;
+            min-width: 12vw;
+            max-width: 20vw;
+        }   
+    }
+    option {
+        font-weight: bold;
+    }
+    span{
+        font-size: 1.5vw;
     }
 `
 
@@ -52,4 +77,10 @@ export const Winner = styled.section `
         display: block;
         margin: 5vh auto;
     }
+`
+
+export const ContainerPokedex= styled.section`
+    display: flex;
+    flex-direction: column;
+    align-items: center;
 `

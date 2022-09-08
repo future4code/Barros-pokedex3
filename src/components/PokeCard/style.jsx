@@ -31,8 +31,8 @@ export const Card = styled.section`
     }
 
     @media screen and (min-width: 526px) and (max-width: 800px){
-        width: 40vw;
-        height: 30vh;
+        width: 30vw;
+        height: 26vh;
 
         img{
             min-width: 16vw;
@@ -41,12 +41,19 @@ export const Card = styled.section`
     }
 
     @media screen and (min-width: 801px){
-            
+        min-width: 15vw;
+        max-width: 30vw;
+        min-height: 29vh;
+        max-height: 40vh;
+
+        img{
+            min-width: 5vw;
+        }  
     }
 `
 
 export const ButtonsCard = styled.div`
     display: flex;
     gap: 1.3vw;
-    margin-top: 1vw;
+    margin-top: 0.5vw;
 `
