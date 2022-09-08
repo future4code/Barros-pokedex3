@@ -46,11 +46,17 @@ export const TypesContainer = styled.div`
         display: flex;
         gap: 20px;
         justify-content: center;
-        li {
-            border: 1px solid lightgray;
-            padding: .5vh;
-        }
     }
+`
+
+export const TypeList = styled.li `
+        width: 7vw;
+        text-align: center;
+        background-color: ${(props) => props.background};
+        color: ${(props) => props.color};
+        opacity: 85%;
+        border: 1px solid ${(props) => props.color};
+        padding: .5vh;
 `
 
 export const Loading = styled.img `

@@ -3,10 +3,11 @@ import { Header } from "../../Header/Header"
 import { useParams } from "react-router-dom";
 import { baseUrl } from "../../../constants/constants";
 import useRequestData from '../../../hooks/useRequestData'
-import { Container, TypesContainer, Loading } from "./style";
+import { Container, TypesContainer, Loading, TypeList } from "./style";
 import loading from '../../../img/loading.png'
 import { GlobalContext } from '../../../context/GlobalContext'
 import Swal from "sweetalert2";
+import { colours } from "../../../constants/pokemon-type-colors";
 
 
 export function DetailsPage() {
@@ -32,8 +33,95 @@ export function DetailsPage() {
     })
     
     const listTypes = dataPokemons && dataPokemons.types.map((type, index) => {
+
+        let colorBack
+        let colorFont
+        switch (type.type.name) {
+            case 'normal':
+                colorFont = colours.normal.hex
+                colorBack = colours.normal.rgba
+                break;
+            case 'fire':
+                colorFont = colours.fire.hex
+                colorBack = colours.fire.rgba
+                break;
+            case 'water':
+                colorFont = colours.water.hex
+                colorBack = colours.water.rgba
+                break;
+            case 'electric':
+                colorFont = colours.electric.hex
+                colorBack = colours.electric.rgba
+                break;
+            case 'grass':
+                colorFont = colours.grass.hex
+                colorBack = colours.grass.rgba
+                break;
+            case 'ice':
+                colorFont = colours.grass.hex
+                colorBack = colours.grass.rgba
+                break;
+            case 'fighting':
+                colorFont = colours.fighting.hex
+                colorBack = colours.fighting.rgba
+                break;
+            case 'poison':
+                colorFont = colours.poison.hex
+                colorBack = colours.poison.rgba
+                break;
+            case 'ground':
+                colorFont = colours.poison.hex
+                colorBack = colours.poison.rgba
+                break;
+            case 'flying':
+                colorFont = colours.flying.hex
+                colorBack = colours.flying.rgba
+                break;
+            case 'psychic':
+                colorFont = colours.psychic.hex
+                colorBack = colours.psychic.rgba
+                break;
+            case 'bug':
+                colorFont = colours.bug.hex
+                colorBack = colours.bug.rgba
+                break;
+            case 'rock':
+                colorFont = colours.rock.hex
+                colorBack = colours.rock.rgba
+                break;
+            case 'ghost':
+                colorFont = colours.ghost.hex
+                colorBack = colours.ghost.rgba
+                break;
+            case 'dragon':
+                colorFont = colours.dragon.hex
+                colorBack = colours.dragon.rgba
+                break;
+            case 'dark':
+                colorFont = colours.dark.hex
+                colorBack = colours.dark.rgba
+                break;
+            case 'steel':
+                colorFont = colours.steel.hex
+                colorBack = colours.steel.rgba
+                break;
+            case 'fairy':
+                colorFont = colours.fairy.hex
+                colorBack = colours.fairy.rgba
+                break;
+            default:
+                colorFont = '#000'
+                colorBack = '#000'
+                break;
+        }
+
         return (
-            <li key={index}> <span> {type.type.name.toUpperCase()} </span></li>
+            <TypeList 
+            color={colorFont}
+            background={colorBack}
+            key={index}> 
+            <span> {type.type.name.toUpperCase()} </span>
+            </TypeList>
         )
     })
 

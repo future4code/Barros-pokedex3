@@ -15,7 +15,7 @@ export function Header() {
             </div>
             <nav>
                 <Link to={"/"}>Home</Link>
-                <Link to={"/pokedex"}>Pokedex</Link>
+                <Link to={"/pokedex"}>Pokédex</Link>
             </nav>
             
         </HeaderSection>
