@@ -36,7 +36,7 @@ export function PokedexPage() {
 
     //Lista da pokeked a ser renderizada no select
     const options = pokedexList && pokedexList.map((pokemon, index) => {
-        return <option key={index} value={pokemon.name}>{pokemon.name}</option>
+        return <option key={index} value={pokemon.name}>{pokemon.name.toUpperCase()}</option>
     })
     
     //Quando usuário compara dois pokemóns
@@ -86,7 +86,7 @@ export function PokedexPage() {
 
                     {showPokemonsBattle && (
                         <Winner>
-                            <h2>O pokemón {winner} ganhou a partida!</h2>
+                            <h2>O pokemón {winner.toUpperCase()} ganhou a partida!</h2>
                             {winner===pokemon1 && (
                                 <img src={dataPokemon1.sprites.front_default} alt={`Foto do pokemon ${winner}`}/>
                             )}
