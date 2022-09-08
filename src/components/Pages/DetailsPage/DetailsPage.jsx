@@ -7,7 +7,7 @@ import { Container, TypesContainer, Loading, TypeList } from "./style";
 import loading from '../../../img/loading.png'
 import { GlobalContext } from '../../../context/GlobalContext'
 import Swal from "sweetalert2";
-import { colours } from "../../../constants/pokemon-type-colors";
+import { colours } from "../../../constants/PokemonTypeColors";
 
 
 export function DetailsPage() {
@@ -58,8 +58,8 @@ export function DetailsPage() {
                 colorBack = colours.grass.rgba
                 break;
             case 'ice':
-                colorFont = colours.grass.hex
-                colorBack = colours.grass.rgba
+                colorFont = colours.ice.hex
+                colorBack = colours.ice.rgba
                 break;
             case 'fighting':
                 colorFont = colours.fighting.hex
@@ -70,8 +70,8 @@ export function DetailsPage() {
                 colorBack = colours.poison.rgba
                 break;
             case 'ground':
-                colorFont = colours.poison.hex
-                colorBack = colours.poison.rgba
+                colorFont = colours.ground.hex
+                colorBack = colours.ground.rgba
                 break;
             case 'flying':
                 colorFont = colours.flying.hex
