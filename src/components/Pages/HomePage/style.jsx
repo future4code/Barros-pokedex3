@@ -40,8 +40,9 @@ export const ButtonsPage = styled.div`
 
     form > input {
     width: 40px;
-    padding: 2px 0;
-    text-align: right;
+    padding: 3px;
+    padding-right: 0;
+    text-align: center;
     border: 1px solid var(--dark-yellow);
     }
 
