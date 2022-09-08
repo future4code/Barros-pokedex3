@@ -143,7 +143,7 @@ export function DetailsPage() {
             })
             Swal.fire({
                 title: 'Sucesso!',
-                text:`Você removeu o ${pokemon.toUpperCase()} da sua pokedéx!`,
+                text:`Você removeu o ${pokemon.toUpperCase()} da sua pokédex!`,
                 icon: "success",
                 confirmButtonColor: '#0075BE'
             })
@@ -152,7 +152,7 @@ export function DetailsPage() {
             const pokedex = [...pokedexList, dataPokemons]
             Swal.fire({
                 title: 'Sucesso!',
-                text:`Você adicionou o ${pokemon.toUpperCase()} à sua pokedéx!`,
+                text:`Você adicionou o ${pokemon.toUpperCase()} à sua pokédex!`,
                 icon: "success",
                 confirmButtonColor: '#0075BE'
             })
@@ -168,7 +168,7 @@ export function DetailsPage() {
             {!isLoadingPokemons && dataPokemons && (
                 <>
                     <TypesContainer>
-                        <button onClick={addOrRemove}>{listOfNames.includes(pokemon)? "Remover da pokedéx" : "Adicionar à pokedéx"}</button>
+                        <button onClick={addOrRemove}>{listOfNames.includes(pokemon)? "Remover da pokédex" : "Adicionar à pokédex"}</button>
                         <h1>{dataPokemons.name.toUpperCase()}</h1>
                         <ul>{listTypes}</ul>
                     </TypesContainer>

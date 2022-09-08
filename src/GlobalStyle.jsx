@@ -35,7 +35,8 @@ export const Container = styled.main `
         }
 
         @media screen and (min-width: 801px){
-            
+            font-size: 0.8vw;
+            margin-bottom: 0.7vw;
         }
     }
     ul {
@@ -46,7 +47,7 @@ export const Container = styled.main `
         line-height: 5vh;
 
         @media screen and (max-width: 525px){
-            font-size: 5vw;
+            font-size: 4.5vw;
         }
 
         @media screen and (min-width: 526px) and (max-width: 800px){
@@ -54,7 +55,7 @@ export const Container = styled.main `
         }
 
         @media screen and (min-width: 801px){
-            
+            font-size: 1.7vw;
         }
     }
     h2 {
@@ -62,7 +63,7 @@ export const Container = styled.main `
         line-height: 7vh;
 
         @media screen and (max-width: 525px){
-            font-size: 5vw;
+            font-size: 4vw;
         }
 
         @media screen and (min-width: 526px) and (max-width: 800px){
@@ -70,9 +71,10 @@ export const Container = styled.main `
         }
 
         @media screen and (min-width: 801px){
-            
+            font-size: 1.5vw;
         }
     }
+
     button {
         cursor: pointer;
         color: white;
@@ -87,28 +89,35 @@ export const Container = styled.main `
         }
 
         @media screen and (max-width: 525px){
-            font-size: 2.5vw;
+            font-size: 3vw;
             min-width: 15vw;
             max-width: 20vw;
             min-height: 2vh;
             max-height: 5vh;
             margin-top: 1vw;
-            padding: 0.5vw;
+            padding: 0.7vw;
         }
 
         @media screen and (min-width: 526px) and (max-width: 800px){
             font-size: 2vw;
-            min-width: 13vw;
-            max-width: 18vw;
+            min-width: 12vw;
+            max-width: 25vw;
             min-height: 1vh;
-            max-height: 7vh;
+            max-height: 3vh;
             margin-bottom: 1.5vw;
             margin-top: 1vw;
-            padding: 0.6vw;
+            padding: 0.4vw;
         }
 
         @media screen and (min-width: 801px){
-            
+            font-size: 0.8vw;
+            min-width: 3vw;
+            max-width: 10vw;
+            min-height: 2vh;
+            max-height: 5vh;
+            margin-bottom: 1.5vw;
+            margin-top: 1vw;
+            padding: 0.3vw;
         }
 
 

@@ -26,7 +26,7 @@ const PokeCard=({pokemon, buttonCard})=>{
     const removePokemon = (poke) => {
         setReload(!reload)
         Swal.fire({
-            text:`Tem certeza que deseja remover ${poke.name.toUpperCase()} da sua Pokedéx?`,
+            text:`Tem certeza que deseja remover ${poke.name.toUpperCase()} da sua Pokédex?`,
             confirmButtonColor: '#0075BE',
             showDenyButton: true,
             denyButtonText: "Cancelar"
