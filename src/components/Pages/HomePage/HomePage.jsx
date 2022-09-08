@@ -6,6 +6,8 @@ import loading from '../../../img/loading.png'
 import { GlobalContext } from "../../../context/GlobalContext";
 import useRequestData from "../../../hooks/useRequestData";
 import { baseUrl } from "../../../constants/constants";
+import arrow from '../../../img/arrow.png'
+import arrowLeft from '../../../img/arrow-left.png'
 
 
 export function HomePage() {
@@ -32,6 +34,7 @@ export function HomePage() {
         }
     }
 
+    //Lógica dos botões que ficam na parte inferior da página
     const totalOffset = dataPokemons && (Number(dataPokemons.count) - 21)
 
     const NextPage = () => {
@@ -50,25 +53,25 @@ export function HomePage() {
         setOffset((page - 1) * 21)
     }
 
-    let Buttons
+    let buttons
     if (offset === 0) {
-        Buttons = <ButtonsPage>
+        buttons = <ButtonsPage>
             <form onSubmit={ChoosePage}>
                 <input type="number" value={page} onChange={(e) => setPage(e.target.value)} max={55}/>
             </form>
-                <button onClick={NextPage}>Próximo</button>
+            <img src={arrow} alt={'Imagem de um seta apontando para o lado direito'} onClick={NextPage}/>
                 </ButtonsPage>
     } else if (offset > 0 && offset < totalOffset) {
-        Buttons = <ButtonsPage>
-            <button onClick={PreviousPage}>Anterior</button>
+        buttons = <ButtonsPage>
+            <img src={arrowLeft} alt={'Imagem de um seta apontando para o lado esquerdo'} onClick={PreviousPage}/>
             <form onSubmit={ChoosePage}>
                 <input type="number" value={page} onChange={(e) => setPage(e.target.value)} max={55}/>
             </form>
-            <button onClick={NextPage}>Próximo</button>
+            <img src={arrow} alt={'Imagem de um seta apontando para o lado esquerdo'} onClick={NextPage}/>
         </ButtonsPage>
     } else {
-        Buttons = <ButtonsPage>
-            <button onClick={PreviousPage}>Anterior</button>
+        buttons = <ButtonsPage>
+            <img src={arrowLeft} alt={'Imagem de um seta apontando para o lado esquerdo'} onClick={PreviousPage}/>
             <form onSubmit={ChoosePage}>
                 <input type="number" value={page} onChange={(e) => setPage(e.target.value)} max={55}/>
             </form>
@@ -85,7 +88,7 @@ export function HomePage() {
                 {!isLoadingPokemons && dataPokemons && pokemons()}
             </CardsContainer>           
 
-            {!isLoadingPokemons && dataPokemons && <>{Buttons}</>}
+            {!isLoadingPokemons && dataPokemons && <>{buttons}</>}
 
             {!isLoadingPokemons && errorPokemons && <p>Erro: {errorPokemons}</p>}
         </>

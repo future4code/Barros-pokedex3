@@ -6,6 +6,7 @@ import PokeCard from "../../PokeCard/PokeCard"
 import Swal from "sweetalert2"
 import useRequestData from "../../../hooks/useRequestData"
 import { baseUrl } from "../../../constants/constants"
+import arrow from '../../../img/arrow.png'
 
 export function PokedexPage() {
     const [buttonCard] = useState("remove")
@@ -59,8 +60,7 @@ export function PokedexPage() {
     }
     
     //Quando usuário compara dois pokemóns
-    const handleBattles = (e) => {
-        e.preventDefault()
+    const handleBattles = () => {
         let statsPokemon1 = []
         let statsPokemon2 = []
 
@@ -92,44 +92,44 @@ export function PokedexPage() {
 
             <ContainerPokedex>
             
-            {pokedexList.length !== 0 &&<BattleButton onClick={handleBattleStart}>{battle? 'Encerrar batalha' : 'Iniciar batalha'}</BattleButton>}
+                {pokedexList.length !== 0 &&<BattleButton onClick={handleBattleStart}>{battle? 'Encerrar batalha' : 'Iniciar batalha'}</BattleButton>}
 
-            {battle && (
-                <Battle onSubmit={handleBattles}>
-                    <select name={'pokemon1'} value={pokemon1} onChange={(e) => setPokemon1(e.target.value)} required>
-                        <option>Selecione</option>
-                        {options}
-                    </select>
-                    <span>X</span>
-                    <select name={'pokemon2'} value={pokemon2} onChange={(e) => setPokemon2(e.target.value)} required>
-                        <option>Selecione</option>
-                        {options}
-                    </select>
-                    <button>Iniciar partida</button>
+                {battle && (
+                    <Battle>
+                        <select name={'pokemon1'} value={pokemon1} onChange={(e) => setPokemon1(e.target.value)} required>
+                            <option>Selecione</option>
+                            {options}
+                        </select>
+                        <span>X</span>
+                        <select name={'pokemon2'} value={pokemon2} onChange={(e) => setPokemon2(e.target.value)} required>
+                            <option>Selecione</option>
+                            {options}
+                        </select>
+                        <img src={arrow} alt={'Imagem de uma seta'} onClick={handleBattles}/>
 
-                    {showPokemonsBattle && (
-                        <Winner>
-                            {winner!=="Empate!"?<h2>O pokemón {winner.toUpperCase()} ganhou a partida!</h2>:<h2>Empate!!</h2>}
-                            {winner!=="Empate!"&&winner===pokemon1 && (
-                                <img src={dataPokemon1.sprites.front_default} alt={`Foto do pokémon ${winner}`}/>
+                        {showPokemonsBattle && (
+                            <Winner>
+                                {winner!=="Empate!"?<h2>O pokemón {winner.toUpperCase()} ganhou a partida!</h2>:<h2>Empate!!</h2>}
+                                {winner!=="Empate!"&&winner===pokemon1 && (
+                                    <img src={dataPokemon1.sprites.front_default} alt={`Foto do pokémon ${winner}`}/>
+                                    )}
+                                {winner!=="Empate!"&&winner===pokemon2 && (
+                                    <img src={dataPokemon2.sprites.front_default} alt={`Foto do pokémon ${winner}`}/>
                                 )}
-                            {winner!=="Empate!"&&winner===pokemon2 && (
-                                <img src={dataPokemon2.sprites.front_default} alt={`Foto do pokémon ${winner}`}/>
-                            )}
-                            <button onClick={() => location.reload()}>Voltar</button>
-                        </Winner>
-                    )}
-                </Battle>
-            )}
-           
-            {pokedexList.length === 0 && <p>Não há pokemóns em sua pokedéx.</p>}
-
-            <Container>
-                {pokedexList && renderData}
-            </Container>
-
-            {pokedexList.length !== 0 && <button onClick={clearPokedex}>Limpar Pokédex</button>}            
+                                <button onClick={() => location.reload()}>Voltar</button>
+                            </Winner>
+                        )}
+                    </Battle>
+                )}
             
+                {pokedexList.length === 0 && <h2>Não há pokemóns em sua pokedéx.</h2>}
+
+                <Container>
+                    {pokedexList && renderData}
+                </Container>
+
+                {pokedexList.length !== 0 && <button onClick={clearPokedex}>Limpar Pokedéx</button>}            
+                
             </ContainerPokedex>
         </>
     )
