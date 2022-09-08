@@ -51,8 +51,22 @@ export const Battle = styled.form `
         font-size: 1.5vw;
     }
     img {
-        width: 3%;
         cursor: pointer;
+        @media screen and (min-width: 1000px) {
+            width: 3%;
+        }
+        @media screen and (min-width: 800px) and (max-width: 1000px) {
+            width: 4%;
+        }
+        @media screen and (min-width: 600px) and (max-width: 800px) {
+            width: 5%;
+        }
+        @media screen and (min-width: 500px) and (max-width: 600px) {
+            width: 6%;
+        }
+        @media screen and (max-width: 500px) {
+            width: 7%;
+        }
         :hover {
             opacity: .8;
         }
