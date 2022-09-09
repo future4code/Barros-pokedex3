@@ -42,24 +42,9 @@ export function PokedexPage() {
 
     //Lista da pokedex a ser renderizada no select
     const options = () => {
-        if (pokemon1 !== "" && pokemon2 === "") {
-            const filter = pokedexList && pokedexList.filter(pokemon => pokemon.name !== pokemon1)
-
-            return filter.map((pokemon, index) => {
-                return <option key={index} value={pokemon.name}>{pokemon.name.toUpperCase()}</option>
-            })
-        } else if (pokemon2 !== "" && pokemon1 === "") {
-            const filter = pokedexList && pokedexList.filter(pokemon => pokemon.name !== pokemon2)
-
-            return filter.map((pokemon, index) => {
-                return <option key={index} value={pokemon.name}>{pokemon.name.toUpperCase()}</option>
-            })
-        } else {
-            return pokedexList && pokedexList.map((pokemon, index) => {
-                return <option key={index} value={pokemon.name}>{pokemon.name.toUpperCase()}</option>
-            })
-        }
-        
+        return pokedexList && pokedexList.map((pokemon, index) => {
+            return <option key={index} value={pokemon.name}>{pokemon.name.toUpperCase()}</option>
+        })        
     }
     
     //Função para adicionar o loading antes do resultado da batalha
@@ -162,13 +147,13 @@ export function PokedexPage() {
                     </Battle>
                 )}
             
-                {pokedexList.length === 0 && <h2>Não há pokemóns em sua pokedéx.</h2>}
+                {pokedexList.length === 0 && <h2>Não há pokémons em sua pokédex.</h2>}
 
                 <Container>
                     {pokedexList && renderData}
                 </Container>
 
-                {pokedexList.length !== 0 && <button onClick={clearPokedex}>Limpar Pokedéx</button>}            
+                {pokedexList.length !== 0 && <button onClick={clearPokedex}>Limpar Pokédex</button>}            
                 
             </ContainerPokedex>
         </>

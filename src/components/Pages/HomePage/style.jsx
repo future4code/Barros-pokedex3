@@ -14,7 +14,7 @@ export const CardsContainer = styled.section`
 
 export const Loading = styled.img `
     display: block;
-    margin: 12vh auto;
+    margin: 25vh auto;
     @keyframes rotate {
         from {transform: rotate(0)}
         to {transform: rotate(360deg)}

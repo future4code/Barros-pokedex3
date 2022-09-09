@@ -17,13 +17,13 @@ export function DetailsPage() {
     const {pokedexList, setPokedexList} = useContext(GlobalContext)
     const [dataPokemons, errorPokemons, isLoadingPokemons] = useRequestData(`${baseUrl}/${pokemon}`)
     
-    //Lista só com os nomes dos pokemons que estão na pokedéx
+    //Lista só com os nomes dos pokémons que estão na pokédex
     let listOfNames = []
     for(let i = 0; i < pokedexList.length; i++) {
         listOfNames.push(pokedexList[i].name)
     }
 
-    //Pegando os detalhes de cada pokemón
+    //Pegando os detalhes de cada pokémon
     let sum = []
     const listStats = dataPokemons && dataPokemons.stats.map((stat, index) => {
         sum.push(stat.base_stat)
@@ -174,8 +174,8 @@ export function DetailsPage() {
                     </TypesContainer>
                     <Container>
                         <picture>
-                            <img src={dataPokemons.sprites.front_default} alt="De frente"/>
-                            <img src={dataPokemons.sprites.back_default} alt="De costas"/>
+                            <img src={dataPokemons.sprites.front_default} alt="Foto do pokémon de frente"/>
+                            <img src={dataPokemons.sprites.back_default} alt="Foto do pokémon de costas"/>
                         </picture>
                         <div>
                             <h2>Stats</h2>
