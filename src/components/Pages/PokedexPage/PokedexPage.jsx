@@ -1,12 +1,14 @@
 import React, { useState, useContext } from "react"
 import { Header } from "../../Header/Header"
 import { GlobalContext } from "../../../context/GlobalContext"
-import {Container, BattleButton, Battle, Winner, ContainerPokedex} from './style'
+import {Container, BattleButton, Battle, Winner, ContainerPokedex, LoadingSection} from './style'
 import PokeCard from "../../PokeCard/PokeCard"
 import Swal from "sweetalert2"
 import useRequestData from "../../../hooks/useRequestData"
 import { baseUrl } from "../../../constants/constants"
 import arrow from '../../../img/arrow.png'
+import loading from '../../../img/loading.png'
+
 
 export function PokedexPage() {
     const [buttonCard] = useState("remove")
@@ -18,6 +20,7 @@ export function PokedexPage() {
     const [pokemon2, setPokemon2] = useState("")
     const [dataPokemon1, error, isLoading, reload, setReload] = useRequestData(`${baseUrl}/${pokemon1}`)
     const [dataPokemon2] = useRequestData(`${baseUrl}/${pokemon2}`)
+    const [loadingResult, setLoadingResult] = useState(false)
 
     
     //Renderizar lista de pokemons adicionados à pokedex
@@ -31,34 +34,46 @@ export function PokedexPage() {
         if (!battle) {
             Swal.fire('Selecione 2 pokémons para se enfrentar')
         } else {
+            setPokemon1("")
+            setPokemon2("")
             Swal.fire('Jogo encerrado!')
         }
     }
 
-    //Lista da pokeked a ser renderizada no select
-    const options = pokedexList && pokedexList.map((pokemon, index) => {
-        return <option key={index} value={pokemon.name}>{pokemon.name.toUpperCase()}</option>
-    })
+    //Lista da pokedex a ser renderizada no select
+    const options = () => {
+        if (pokemon1 !== "" && pokemon2 === "") {
+            const filter = pokedexList && pokedexList.filter(pokemon => pokemon.name !== pokemon1)
 
-    //Limpar pokédex    
-    const clearPokedex = () => {
-        setReload(!reload)
-        Swal.fire({
-            text:'Tem certeza que deseja limpar sua Pokédex?',
-            confirmButtonColor: '#0075BE',
-            showDenyButton: true,
-            denyButtonText: "Cancelar"
-        })
-        .then((result) => {
-            if(result.isConfirmed) {
-                setPokedexList([])
-                Swal.fire('Pokédex limpa!')
-            } else if(result.isDenied) {
-                Swal.fire('Pokémons mantidos na sua Pokédex!')
-            }
-        })
+            return filter.map((pokemon, index) => {
+                return <option key={index} value={pokemon.name}>{pokemon.name.toUpperCase()}</option>
+            })
+        } else if (pokemon2 !== "" && pokemon1 === "") {
+            const filter = pokedexList && pokedexList.filter(pokemon => pokemon.name !== pokemon2)
+
+            return filter.map((pokemon, index) => {
+                return <option key={index} value={pokemon.name}>{pokemon.name.toUpperCase()}</option>
+            })
+        } else {
+            return pokedexList && pokedexList.map((pokemon, index) => {
+                return <option key={index} value={pokemon.name}>{pokemon.name.toUpperCase()}</option>
+            })
+        }
+        
     }
     
+    //Função para adicionar o loading antes do resultado da batalha
+    const loadingBattleResult = () => {
+        setLoadingResult(true)
+        setTimeout(() => battleResult(), 2000)
+    }
+
+    //Mostrar resultado da batalha
+    const battleResult = () => {
+        setLoadingResult(false)
+        setShowPokemonsBattle(true)
+    }
+
     //Quando usuário compara dois pokemóns
     const handleBattles = () => {
         let statsPokemon1 = []
@@ -82,43 +97,68 @@ export function PokedexPage() {
             setWinner("Empate!")
         }
 
+        loadingBattleResult()
+    }
 
-        setShowPokemonsBattle(true)
+    //Limpar pokédex    
+    const clearPokedex = () => {
+        setReload(!reload)
+        Swal.fire({
+            text:'Tem certeza que deseja limpar sua Pokédex?',
+            confirmButtonColor: '#0075BE',
+            showDenyButton: true,
+            denyButtonText: "Cancelar"
+        })
+        .then((result) => {
+            if(result.isConfirmed) {
+                setPokedexList([])
+                Swal.fire('Pokédex limpa!')
+            } else if(result.isDenied) {
+                Swal.fire('Pokémons mantidos na sua Pokédex!')
+            }
+        })
     }
     
     return (
         <>
             <Header/>
 
-            <ContainerPokedex>
-            
+            <ContainerPokedex>  
                 {pokedexList.length !== 0 &&<BattleButton onClick={handleBattleStart}>{battle? 'Encerrar batalha' : 'Iniciar batalha'}</BattleButton>}
 
                 {battle && (
                     <Battle>
                         <select name={'pokemon1'} value={pokemon1} onChange={(e) => setPokemon1(e.target.value)} required>
-                            <option>Selecione</option>
-                            {options}
+                            <option value="">Selecione</option>
+                            {options()}
                         </select>
                         <span>X</span>
                         <select name={'pokemon2'} value={pokemon2} onChange={(e) => setPokemon2(e.target.value)} required>
-                            <option>Selecione</option>
-                            {options}
+                            <option value="">Selecione</option>
+                            {options()}
                         </select>
                         <img src={arrow} alt={'Imagem de uma seta'} onClick={handleBattles}/>
 
+                        {loadingResult && (
+                            <LoadingSection>
+                                <img src={loading} alt={'Imagem de um círculo girando'}/>
+                            </LoadingSection>
+                        )}
+
                         {showPokemonsBattle && (
                             <Winner>
-                                {winner!=="Empate!"?<h2>O pokemón {winner.toUpperCase()} ganhou a partida!</h2>:<h2>Empate!!</h2>}
-                                {winner!=="Empate!"&&winner===pokemon1 && (
+                                {winner !== "Empate!"? <h2>O pokemón {winner.toUpperCase()} ganhou a partida!</h2> : <h2>Empate!</h2>}
+                                {winner === pokemon1 && (
                                     <img src={dataPokemon1.sprites.front_default} alt={`Foto do pokémon ${winner}`}/>
-                                    )}
-                                {winner!=="Empate!"&&winner===pokemon2 && (
+                                )}
+                                {winner === pokemon2 && (
                                     <img src={dataPokemon2.sprites.front_default} alt={`Foto do pokémon ${winner}`}/>
                                 )}
                                 <button onClick={() => location.reload()}>Voltar</button>
                             </Winner>
                         )}
+
+
                     </Battle>
                 )}
             

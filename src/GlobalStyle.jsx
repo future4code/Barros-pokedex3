@@ -21,7 +21,6 @@ export const Container = styled.main `
     height: 100vh;
     font-family: 'Montserrat', sans-serif;
     p, li {
-        font-size: 16px;
         line-height: 3vh;
 
         @media screen and (max-width: 525px){
@@ -43,7 +42,6 @@ export const Container = styled.main `
         list-style: none;
     }
     h1 {
-        font-size: 34px;
         line-height: 5vh;
 
         @media screen and (max-width: 525px){
@@ -59,7 +57,6 @@ export const Container = styled.main `
         }
     }
     h2 {
-        font-size: 26px;
         line-height: 7vh;
 
         @media screen and (max-width: 525px){

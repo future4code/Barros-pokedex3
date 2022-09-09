@@ -88,7 +88,7 @@ export const Winner = styled.section `
     h2 {
         color: white;
         text-align: center;
-        margin-top: 17vh;
+        padding-top: 15vh;
     }
     img {
         display: block;
@@ -142,3 +142,27 @@ export const ContainerPokedex= styled.section`
     }
 `
 
+export const LoadingSection = styled.div `
+    background-color: var(--light-blue);
+    position: absolute;
+    top: 0;
+    height: 100vh;
+    width: 100vw;
+    img {
+        display: block;
+        margin: 30vh auto;
+        @keyframes rotate {
+            from {transform: rotate(0)}
+            to {transform: rotate(360deg)}
+        }
+        
+        animation: rotate 1s infinite;
+        
+        @media screen and (min-width: 1000px) {
+            width: 4%;
+        }
+        @media screen and (min-width: 320px) and (max-width: 1000px) {
+            width: 15%;
+        }
+    }
+`
